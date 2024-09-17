@@ -226,44 +226,87 @@ class Tree:
                 size += subtree_size
             return total, size
 
-    def __eq__(self, other: Tree) -> bool:
-        """Return whether <self> and <other> are equal.
-        """
-        if self.is_empty() and other.is_empty():
-            return True
-        elif self.is_empty() or other.is_empty():
-            return False
-        else:
-            if self._root != other._root:
-                return False
+#     def __eq__(self, other: Tree) -> bool:
+#         """Return whether <self> and <other> are equal.
+#         """
+#         if self.is_empty() and other.is_empty():
+#             return True
+#         elif self.is_empty() or other.is_empty():
+#             return False
+#         else:
+#             if self._root != other._root:
+#                 return False
+#
+#             if len(self._subtrees) != len(other._subtrees):
+#                 return False
+#
+#             return self._subtrees == other._subtrees
 
-            if len(self._subtrees) != len(other._subtrees):
-                return False
+    public boolean equals(Tree other){
+        # Return whether <self> and <other> are equal.
+        if (this.isEmpty() && other.isEmpty){
+            return true;
+        }
+        else if this.isEmpty() || other.isEmpty){
+            return false;
+        }
+        else{
+            if(this.root != other.root){
+                            return false;
+                        }
+                        if this.subtrees.len() != other.subtrees.len()){
+                            return false;
+                        }
+                        return this.subtrees == other.subtrees;
+        }
+    }
 
-            return self._subtrees == other._subtrees
-
-    def __contains__(self, item: int) -> bool:
-        """Return whether <item> is in this tree.
-
-        >>> t = Tree(1, [Tree(2, []), Tree(5, [])])
-        >>> 1 in t  # Same as t.__contains__(1)
-        True
-        >>> 5 in t
-        True
-        >>> 4 in t
-        False
-        """
-        if self.is_empty():
-            return False
-
-        # item may in root, or subtrees
-        if self._root == item:
-            return True
-        else:
-            for subtree in self._subtrees:
-                if item in subtree:
-                    return True
-            return False
+#     def __contains__(self, item: int) -> bool:
+#         """Return whether <item> is in this tree.
+#
+#         >>> t = Tree(1, [Tree(2, []), Tree(5, [])])
+#         >>> 1 in t  # Same as t.__contains__(1)
+#         True
+#         >>> 5 in t
+#         True
+#         >>> 4 in t
+#         False
+#         """
+#         if self.is_empty():
+#             return False
+#
+#         # item may in root, or subtrees
+#         if self._root == item:
+#             return True
+#         else:
+#             for subtree in self._subtrees:
+#                 if item in subtree:
+#                     return True
+#             return False
+    public boolean contains(int item){
+        #Return whether <item> is in this tree.
+        #>>> t = Tree(1, [Tree(2, []), Tree(5, [])])
+        #>>> 1 in t  # Same as t.__contains__(1)
+        #   True
+        #>>> 5 in t
+        #   True
+        #>>> 4 in t
+        #   False
+        if(this.isEmpty()){
+            return false
+        }
+        if (this.root == item){
+            return true
+        }
+        else{
+            for (Tree subtree : this.subtrees){
+                if (item in subtree){
+                    return true
+                }
+            return false
+            }
+        }
+    }
 
     def leaves(self) -> list[int]:
         """Return a list of all the leaf items in the tree.
